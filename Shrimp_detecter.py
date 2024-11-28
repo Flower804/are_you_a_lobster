@@ -6,7 +6,10 @@ from tkinter.ttk import *
 from PIL import ImageTk, Image
 
 
+#TODO: try to put the sounds as global so it's easier to stop the autios
+#TODO: add dinamic logos yk what it means
 
+#def on_close():
 
 #images stuff
 
@@ -29,8 +32,8 @@ def result1():
     
     #Pack stuff  
     panel.pack( fill = "both", expand = "yes")
-      
-    mainloop()
+    window.protocol("WM_DELETE_WINDOW", )#create FUNC to stop audio and impletent it
+    window.mainloop()
     
 def result2():
     mixer.init()
@@ -44,15 +47,20 @@ def result2():
     path = "images/OIP.jpg"
     
     img = ImageTk.PhotoImage(Image.open(path), master=window)
+    label = tk.Label(window,
+                     text="you made the lobster sad",
+                     font=("Helvetica", 14))
     
     panel = tk.Label(window, image = img)
     
+    label.pack(fill = "both", expand="yes")
     panel.pack(fill = "both", expand="yes")
+    
     
     mainloop()
     
 
-def scanner():
+def scanner(): #second window
     window = tk.Tk()
     window.title("The question")
     window.geometry("200x200")
@@ -63,15 +71,15 @@ def scanner():
                     text="Are you a lobster?",
                     font = ("Helvetica", 14))
     
-    button = tk.Button(window, text="Yes", command= result1 )
-    button2 = tk.Button(window, text="No", command= result2)
+    button = tk.Button(window, text="Yes", command= result1, width=5)
+    button2 = tk.Button(window, text="No", command= result2, width=5)
     
     bottom.pack(side=BOTTOM, fill=BOTH, expand=TRUE)
     
     #pack stuff
     text.pack(side="top", expand="yes")
-    button.pack(in_=bottom, side=LEFT)
-    button2.pack(in_=bottom, side=LEFT)
+    button.pack(in_=bottom, side=LEFT,  expand ="yes")
+    button2.pack(in_=bottom, side=LEFT, expand="yes")
     
 
 def openNewWindow():
@@ -97,5 +105,6 @@ def openNewWindow():
     mainloop()
 
 
-openNewWindow()
-#result1()
+openNewWindow() #1ºwindow
+
+#result1()       #final window/1
